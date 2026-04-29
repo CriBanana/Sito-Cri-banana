@@ -1,1 +1,1025 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ziofede82 — Canale Ufficiale</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,600;0,700;1,400&family=Barlow+Condensed:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+  :root {
+    --red: #E8232A;
+    --red-dark: #B01A20;
+    --red-light: #FF4B52;
+    --black: #0A0A0A;
+    --dark: #111111;
+    --dark2: #1A1A1A;
+    --dark3: #222222;
+    --card: #181818;
+    --border: rgba(255,255,255,0.07);
+    --text: #F0F0F0;
+    --muted: #888;
+    --gold: #FFB800;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--black);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 64px;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem; letter-spacing: 2px; color: var(--red);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.9rem; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--muted); text-decoration: none;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--red); }
+  .nav-cta {
+    background: var(--red); color: #fff; border: none; padding: .5rem 1.2rem;
+    font-family: 'Barlow Condensed', sans-serif; font-size: .85rem;
+    font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    cursor: pointer; text-decoration: none; transition: background .2s;
+    border-radius: 2px;
+  }
+  .nav-cta:hover { background: var(--red-light); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    position: relative;
+    padding-top: 64px;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 60% 50%, #3a0a0b 0%, var(--black) 70%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(232,35,42,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232,35,42,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: rgba(232,35,42,0.15); border: 1px solid rgba(232,35,42,0.3);
+    color: var(--red-light); font-size: .75rem; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: .35rem .85rem; border-radius: 2px; margin-bottom: 1.5rem;
+  }
+  .hero-tag::before { content: ''; width: 6px; height: 6px; background: var(--red); border-radius: 50%; animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100%{ opacity:1; transform:scale(1); } 50%{ opacity:.5; transform:scale(1.4); } }
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 8vw, 7rem);
+    line-height: .92; letter-spacing: 2px;
+    color: var(--text);
+  }
+  .hero-title span { color: var(--red); }
+  .hero-sub {
+    margin-top: 1.5rem;
+    font-size: 1.1rem; color: var(--muted); line-height: 1.7; max-width: 480px;
+  }
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-top: 2.5rem;
+  }
+  .stat-item { text-align: left; }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem; color: var(--text); letter-spacing: 1px;
+  }
+  .stat-num span { color: var(--red); }
+  .stat-label { font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 2px; }
+  .hero-btns { display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--red); color: #fff; border: 2px solid var(--red);
+    padding: .85rem 2rem; font-family: 'Barlow Condensed', sans-serif;
+    font-size: .95rem; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; cursor: pointer; text-decoration: none;
+    transition: all .2s; border-radius: 2px; display: inline-flex; align-items: center; gap: .5rem;
+  }
+  .btn-primary:hover { background: var(--red-light); border-color: var(--red-light); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent; color: var(--text); border: 2px solid var(--border);
+    padding: .85rem 2rem; font-family: 'Barlow Condensed', sans-serif;
+    font-size: .95rem; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; cursor: pointer; text-decoration: none;
+    transition: all .2s; border-radius: 2px; display: inline-flex; align-items: center; gap: .5rem;
+  }
+  .btn-outline:hover { border-color: var(--red); color: var(--red); transform: translateY(-2px); }
+  .hero-avatar {
+    display: flex; justify-content: center; align-items: center;
+  }
+  .avatar-wrapper {
+    position: relative; width: 340px; height: 340px;
+  }
+  .avatar-ring {
+    position: absolute; inset: -12px; border-radius: 50%;
+    border: 2px solid rgba(232,35,42,0.3);
+    animation: spin 12s linear infinite;
+  }
+  .avatar-ring::before {
+    content: ''; position: absolute; top: -4px; left: 50%; transform: translateX(-50%);
+    width: 8px; height: 8px; background: var(--red); border-radius: 50%;
+  }
+  @keyframes spin { from{ transform: rotate(0deg); } to{ transform: rotate(360deg); } }
+  .avatar-img {
+    width: 100%; height: 100%; border-radius: 50%;
+    background: linear-gradient(135deg, #2a0a0b 0%, #1a1a1a 100%);
+    border: 3px solid rgba(232,35,42,0.4);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; position: relative;
+  }
+  .avatar-initials {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 7rem; color: var(--red); letter-spacing: 4px; opacity: 0.6;
+  }
+  .avatar-decoration {
+    position: absolute; inset: 0; border-radius: 50%;
+    background: radial-gradient(ellipse at 30% 30%, rgba(232,35,42,0.15), transparent 60%);
+  }
+  .floating-badge {
+    position: absolute; background: var(--card);
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: .5rem .85rem; display: flex; align-items: center; gap: .5rem;
+    font-size: .8rem; font-weight: 600; white-space: nowrap;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  }
+  .floating-badge.top { top: 10px; right: -20px; animation: float1 3s ease-in-out infinite; }
+  .floating-badge.bottom { bottom: 30px; left: -30px; animation: float2 3.5s ease-in-out infinite; }
+  .floating-badge.mid { top: 50%; right: -40px; transform: translateY(-50%); animation: float1 4s ease-in-out infinite reverse; }
+  @keyframes float1 { 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(-8px); } }
+  @keyframes float2 { 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(8px); } }
+  .badge-icon { font-size: 1rem; }
+  .scroll-hint {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: .5rem;
+    color: var(--muted); font-size: .75rem; letter-spacing: 1.5px; text-transform: uppercase;
+    animation: bounce 2s ease-in-out infinite;
+  }
+  .scroll-hint svg { width: 20px; opacity: .5; }
+  @keyframes bounce { 0%,100%{ transform: translateX(-50%) translateY(0); } 50%{ transform: translateX(-50%) translateY(6px); } }
+
+  /* SECTIONS COMMON */
+  section { padding: 6rem 0; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: .75rem; font-weight: 700; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--red); margin-bottom: .75rem;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: 2px;
+    line-height: 1; margin-bottom: 1.5rem;
+  }
+  .section-desc { color: var(--muted); max-width: 560px; line-height: 1.7; font-size: 1.05rem; }
+  .divider { width: 48px; height: 3px; background: var(--red); margin: 1.5rem 0; }
+
+  /* CHI SONO */
+  #about { background: var(--dark); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: start; margin-top: 4rem; }
+  .about-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 2rem; position: relative; overflow: hidden;
+  }
+  .about-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--red), transparent);
+  }
+  .about-emoji { font-size: 3rem; margin-bottom: 1rem; }
+  .about-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem; letter-spacing: 2px; margin-bottom: .25rem;
+  }
+  .about-real { color: var(--muted); font-size: .85rem; margin-bottom: 1.5rem; }
+  .about-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem; }
+  .tag {
+    background: rgba(232,35,42,0.1); border: 1px solid rgba(232,35,42,0.2);
+    color: var(--red-light); font-size: .75rem; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase; padding: .25rem .65rem; border-radius: 3px;
+  }
+  .tag.gray { background: rgba(255,255,255,0.05); border-color: var(--border); color: var(--muted); }
+  .about-info { display: flex; flex-direction: column; gap: .75rem; }
+  .info-row { display: flex; gap: .75rem; align-items: center; }
+  .info-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
+  .info-label { font-size: .8rem; color: var(--muted); min-width: 80px; }
+  .info-val { font-size: .9rem; font-weight: 600; }
+  .about-text p { color: var(--muted); line-height: 1.8; margin-bottom: 1.2rem; font-size: 1.05rem; }
+  .about-text p strong { color: var(--text); }
+  .about-highlights { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+  .highlight-card {
+    background: var(--dark2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1.25rem;
+  }
+  .highlight-icon { font-size: 1.5rem; margin-bottom: .5rem; }
+  .highlight-title { font-weight: 700; font-size: .95rem; margin-bottom: .25rem; }
+  .highlight-desc { font-size: .82rem; color: var(--muted); line-height: 1.5; }
+
+  /* CONTENUTI / GIOCHI */
+  #content { background: var(--black); }
+  .games-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+  .game-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden; position: relative;
+    transition: transform .3s, border-color .3s;
+    cursor: default;
+  }
+  .game-card:hover { transform: translateY(-4px); border-color: rgba(232,35,42,0.3); }
+  .game-header { padding: 2rem 1.5rem 1.5rem; position: relative; }
+  .game-icon-big { font-size: 3.5rem; display: block; margin-bottom: .75rem; }
+  .game-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem; letter-spacing: 1.5px; margin-bottom: .25rem;
+  }
+  .game-type { font-size: .78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; }
+  .game-body { padding: 0 1.5rem 1.5rem; }
+  .game-desc { font-size: .88rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
+  .game-bar { height: 3px; background: var(--dark3); border-radius: 2px; overflow: hidden; }
+  .game-bar-fill { height: 100%; background: var(--red); border-radius: 2px; }
+  .game-bar-label { display: flex; justify-content: space-between; font-size: .72rem; color: var(--muted); margin-top: .4rem; }
+  .featured-badge {
+    position: absolute; top: 1rem; right: 1rem;
+    background: var(--gold); color: #111; font-size: .65rem; font-weight: 800;
+    letter-spacing: 1.5px; text-transform: uppercase; padding: .2rem .6rem; border-radius: 3px;
+  }
+
+  /* POSTAZIONE */
+  #setup { background: var(--dark); }
+  .setup-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: center; margin-top: 4rem; }
+  .setup-visual {
+    background: var(--dark2); border: 1px solid var(--border);
+    border-radius: 16px; padding: 2.5rem;
+    position: relative; overflow: hidden;
+  }
+  .setup-visual::before {
+    content: ''; position: absolute; bottom: 0; right: 0;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(232,35,42,0.08), transparent);
+  }
+  .setup-desk {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  }
+  .setup-item {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1rem;
+    display: flex; align-items: flex-start; gap: .75rem;
+    transition: border-color .2s;
+  }
+  .setup-item:hover { border-color: rgba(232,35,42,0.3); }
+  .setup-item.wide { grid-column: 1/-1; }
+  .item-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+  .item-name { font-size: .85rem; font-weight: 700; margin-bottom: .15rem; }
+  .item-detail { font-size: .75rem; color: var(--muted); }
+  .setup-specs { display: flex; flex-direction: column; gap: 1.5rem; }
+  .spec-group { }
+  .spec-group-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: .7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--red); margin-bottom: .75rem;
+  }
+  .spec-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: .6rem 0; border-bottom: 1px solid var(--border);
+    font-size: .88rem;
+  }
+  .spec-row:last-child { border-bottom: none; }
+  .spec-key { color: var(--muted); }
+  .spec-val { font-weight: 600; }
+  .spec-badge {
+    background: rgba(232,35,42,0.1); border: 1px solid rgba(232,35,42,0.2);
+    color: var(--red-light); font-size: .7rem; font-weight: 700;
+    padding: .15rem .5rem; border-radius: 3px;
+  }
+
+  /* VIDEOS */
+  #videos { background: var(--black); }
+  .videos-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
+  .videos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .video-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden;
+    transition: transform .3s, border-color .3s; cursor: pointer;
+    text-decoration: none;
+  }
+  .video-card:hover { transform: translateY(-4px); border-color: rgba(232,35,42,0.4); }
+  .video-thumb {
+    aspect-ratio: 16/9;
+    background: var(--dark3); position: relative;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .thumb-bg {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem; opacity: .2;
+  }
+  .play-btn {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: rgba(232,35,42,0.9); display: flex; align-items: center; justify-content: center;
+    position: relative; z-index: 2; transition: transform .2s;
+  }
+  .video-card:hover .play-btn { transform: scale(1.1); }
+  .play-btn svg { width: 20px; margin-left: 3px; fill: white; }
+  .video-duration {
+    position: absolute; bottom: 8px; right: 8px;
+    background: rgba(0,0,0,0.8); color: white; font-size: .72rem; font-weight: 700;
+    padding: .15rem .4rem; border-radius: 3px;
+  }
+  .video-info { padding: 1rem 1.25rem 1.25rem; }
+  .video-title { font-size: .9rem; font-weight: 700; line-height: 1.4; margin-bottom: .5rem; }
+  .video-meta { display: flex; gap: 1rem; }
+  .video-stat { font-size: .75rem; color: var(--muted); }
+  .video-category {
+    display: inline-block; font-size: .65rem; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    padding: .15rem .5rem; border-radius: 3px; margin-bottom: .5rem;
+  }
+  .cat-minecraft { background: rgba(76,175,80,0.15); color: #81c784; border: 1px solid rgba(76,175,80,0.2); }
+  .cat-roblox { background: rgba(33,150,243,0.15); color: #64b5f6; border: 1px solid rgba(33,150,243,0.2); }
+  .cat-gaming { background: rgba(232,35,42,0.1); color: var(--red-light); border: 1px solid rgba(232,35,42,0.2); }
+  .cat-fun { background: rgba(255,184,0,0.1); color: #ffd54f; border: 1px solid rgba(255,184,0,0.2); }
+  .view-more {
+    text-align: center; margin-top: 3rem;
+  }
+
+  /* COMMUNITY */
+  #community { background: var(--dark); }
+  .community-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: center; }
+  .community-left { }
+  .community-numbers { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+  .num-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.5rem; text-align: center;
+  }
+  .num-big {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.8rem; color: var(--red); letter-spacing: 1px;
+  }
+  .num-label { font-size: .78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; margin-top: .25rem; }
+  .socials-list { display: flex; flex-direction: column; gap: .75rem; margin-top: 2rem; }
+  .social-row {
+    display: flex; align-items: center; gap: 1rem;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: .85rem 1.2rem;
+    text-decoration: none; color: var(--text);
+    transition: border-color .2s, transform .2s;
+  }
+  .social-row:hover { border-color: var(--red); transform: translateX(4px); }
+  .social-icon { font-size: 1.2rem; width: 28px; text-align: center; }
+  .social-name { font-weight: 700; font-size: .9rem; }
+  .social-handle { font-size: .8rem; color: var(--muted); }
+  .social-arrow { margin-left: auto; color: var(--muted); font-size: .8rem; }
+  .values-list { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 1rem; }
+  .value-item { display: flex; gap: 1rem; align-items: flex-start; }
+  .value-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem; color: rgba(232,35,42,0.3); line-height: 1; flex-shrink: 0; min-width: 32px;
+  }
+  .value-text h4 { font-size: .95rem; font-weight: 700; margin-bottom: .2rem; }
+  .value-text p { font-size: .85rem; color: var(--muted); line-height: 1.5; }
+
+  /* CTA FINALE */
+  #cta {
+    background: var(--black); padding: 5rem 0;
+    position: relative; overflow: hidden;
+  }
+  .cta-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(232,35,42,0.08), transparent);
+  }
+  .cta-inner {
+    position: relative; text-align: center; max-width: 640px; margin: 0 auto;
+  }
+  .cta-icon { font-size: 3.5rem; margin-bottom: 1.5rem; }
+  .cta-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: 2px; margin-bottom: 1rem;
+  }
+  .cta-sub { color: var(--muted); font-size: 1.05rem; line-height: 1.7; margin-bottom: 2.5rem; }
+  .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-xl {
+    padding: 1rem 2.5rem; font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    border-radius: 3px; text-decoration: none; display: inline-flex; align-items: center; gap: .6rem;
+    transition: all .2s;
+  }
+  .btn-xl.red { background: var(--red); color: white; border: 2px solid var(--red); }
+  .btn-xl.red:hover { background: var(--red-light); border-color: var(--red-light); transform: translateY(-2px); }
+  .btn-xl.ghost { background: transparent; color: var(--text); border: 2px solid var(--border); }
+  .btn-xl.ghost:hover { border-color: var(--red); color: var(--red); transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark2); border-top: 1px solid var(--border);
+    padding: 2.5rem 0;
+  }
+  .footer-inner {
+    display: flex; justify-content: space-between; align-items: center;
+    max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+  }
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem; letter-spacing: 2px; color: var(--red);
+  }
+  .footer-copy { font-size: .8rem; color: var(--muted); }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { font-size: .8rem; color: var(--muted); text-decoration: none; transition: color .2s; }
+  .footer-links a:hover { color: var(--red); }
+
+  /* ANIMATE ON SCROLL */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: .1s; }
+  .reveal-delay-2 { transition-delay: .2s; }
+  .reveal-delay-3 { transition-delay: .3s; }
+
+  @media (max-width: 900px) {
+    .hero-content, .about-grid, .setup-grid, .community-grid { grid-template-columns: 1fr; }
+    .hero-avatar { display: none; }
+    .games-grid, .videos-grid { grid-template-columns: 1fr 1fr; }
+    .videos-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  }
+  @media (max-width: 600px) {
+    .games-grid, .videos-grid { grid-template-columns: 1fr; }
+    nav .nav-links { display: none; }
+    .hero-stats { gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">ZIOFEDE82</a>
+  <ul class="nav-links">
+    <li><a href="#about">Chi Sono</a></li>
+    <li><a href="#content">Contenuti</a></li>
+    <li><a href="#setup">Postazione</a></li>
+    <li><a href="#videos">Video</a></li>
+    <li><a href="#community">Community</a></li>
+  </ul>
+  <a href="https://www.youtube.com/@ziofede821?sub_confirmation=1" target="_blank" class="nav-cta">Iscriviti</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content container">
+    <div>
+      <div class="hero-tag">
+        🔴 Gaming ITA in diretta
+      </div>
+      <h1 class="hero-title">ZIO<br><span>FEDE</span>82</h1>
+      <p class="hero-sub">Gamer per passione, amante del gelato 🍦 — il canale italiano per chi ama il gaming divertente. Minecraft, Roblox e tanto intrattenimento.</p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">100<span>%</span></div>
+          <div class="stat-label">Gaming ITA</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">∞</div>
+          <div class="stat-label">Divertimento</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">1<span>+</span></div>
+          <div class="stat-label">Gusti Gelato</div>
+        </div>
+      </div>
+      <div class="hero-btns">
+        <a href="https://www.youtube.com/@ziofede821" target="_blank" class="btn-primary">
+          ▶ Guarda i Video
+        </a>
+        <a href="#about" class="btn-outline">
+          Scopri di più
+        </a>
+      </div>
+    </div>
+    <div class="hero-avatar">
+      <div class="avatar-wrapper">
+        <div class="avatar-ring"></div>
+        <div class="avatar-img">
+          <div class="avatar-initials">ZF</div>
+          <div class="avatar-decoration"></div>
+        </div>
+        <div class="floating-badge top">
+          <span class="badge-icon">🎮</span>
+          <span>Gamer Pro</span>
+        </div>
+        <div class="floating-badge bottom">
+          <span class="badge-icon">🍦</span>
+          <span>Amante del Gelato</span>
+        </div>
+        <div class="floating-badge mid">
+          <span class="badge-icon">🇮🇹</span>
+          <span>ITA</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Scorri</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+</section>
+
+<!-- CHI SONO -->
+<section id="about">
+  <div class="container">
+    <div class="section-label">Profilo</div>
+    <h2 class="section-title">Chi è Ziofede82?</h2>
+    <div class="divider"></div>
+    <div class="about-grid">
+      <div>
+        <div class="about-card reveal">
+          <div class="about-emoji">🎮</div>
+          <div class="about-name">ZIOFEDE82</div>
+          <div class="about-real">@ziofede821 su YouTube</div>
+          <div class="about-tags">
+            <span class="tag">Gaming</span>
+            <span class="tag">Minecraft</span>
+            <span class="tag">Roblox</span>
+            <span class="tag gray">ITA</span>
+            <span class="tag gray">Comedy</span>
+          </div>
+          <div class="about-info">
+            <div class="info-row">
+              <div class="info-dot"></div>
+              <span class="info-label">Piattaforma</span>
+              <span class="info-val">YouTube</span>
+            </div>
+            <div class="info-row">
+              <div class="info-dot"></div>
+              <span class="info-label">Lingua</span>
+              <span class="info-val">Italiano 🇮🇹</span>
+            </div>
+            <div class="info-row">
+              <div class="info-dot"></div>
+              <span class="info-label">Specialità</span>
+              <span class="info-val">Gaming Comico</span>
+            </div>
+            <div class="info-row">
+              <div class="info-dot"></div>
+              <span class="info-label">Passione</span>
+              <span class="info-val">Videogiochi & Gelato 🍦</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="about-text reveal reveal-delay-1">
+        <p><strong>Ziofede82</strong> è uno YouTuber italiano appassionato di videogiochi che ha costruito la sua identità attorno a un concetto semplice ma vincente: gaming divertente, spontaneo e genuinamente italiano.</p>
+        <p>Il suo canale è un punto di riferimento per gli amanti del gaming italiano, con un focus particolare su <strong>Minecraft</strong> e <strong>Roblox</strong>, due dei titoli più amati dalla community. I suoi video si distinguono per un tono comico e leggero, perfetto per chi vuole rilassarsi e ridere.</p>
+        <p>La sua filosofia? Se ami il gaming <em>e</em> il gelato, sei nel posto giusto. Un mix di gameplay esilaranti, sfide creative e un'energia contagiosa che ha conquistato la sua community.</p>
+        <div class="about-highlights">
+          <div class="highlight-card">
+            <div class="highlight-icon">🏆</div>
+            <div class="highlight-title">Sfide Epic</div>
+            <div class="highlight-desc">Sfide gaming uniche e mai banali con la community</div>
+          </div>
+          <div class="highlight-card">
+            <div class="highlight-icon">😂</div>
+            <div class="highlight-title">Gameplay Comici</div>
+            <div class="highlight-desc">Contenuti divertenti che fanno ridere dal primo secondo</div>
+          </div>
+          <div class="highlight-card">
+            <div class="highlight-icon">🎯</div>
+            <div class="highlight-title">100% ITA</div>
+            <div class="highlight-desc">Contenuto esclusivamente in lingua italiana</div>
+          </div>
+          <div class="highlight-card">
+            <div class="highlight-icon">🍦</div>
+            <div class="highlight-title">Vibe Unico</div>
+            <div class="highlight-desc">Personalità autentica e riconoscibile</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTENUTI -->
+<section id="content">
+  <div class="container">
+    <div class="section-label">Cosa fa</div>
+    <h2 class="section-title">I Suoi Contenuti</h2>
+    <div class="divider"></div>
+    <p class="section-desc">Dai server Minecraft alle avventure su Roblox, ogni video è un'esperienza di puro intrattenimento gaming italiano.</p>
+    <div class="games-grid">
+      <div class="game-card reveal">
+        <div class="featured-badge">★ Main</div>
+        <div class="game-header">
+          <span class="game-icon-big">⛏️</span>
+          <div class="game-name">Minecraft</div>
+          <div class="game-type">Survival · Server · Build</div>
+        </div>
+        <div class="game-body">
+          <p class="game-desc">Il cuore del canale. Gameplay su server italiani, sfide creative, build epiche e avventure nel survival che non ti aspetti.</p>
+          <div class="game-bar"><div class="game-bar-fill" style="width:85%"></div></div>
+          <div class="game-bar-label"><span>Frequenza contenuti</span><span>85%</span></div>
+        </div>
+      </div>
+      <div class="game-card reveal reveal-delay-1">
+        <div class="game-header">
+          <span class="game-icon-big">🎪</span>
+          <div class="game-name">Roblox</div>
+          <div class="game-type">Gameplay · Sfide · Fun</div>
+        </div>
+        <div class="game-body">
+          <p class="game-desc">Avventure su Roblox in modalità italiana: gameplay divertenti, modalità pazze e sfide con la community che fanno ridere a crepapelle.</p>
+          <div class="game-bar"><div class="game-bar-fill" style="width:70%"></div></div>
+          <div class="game-bar-label"><span>Frequenza contenuti</span><span>70%</span></div>
+        </div>
+      </div>
+      <div class="game-card reveal reveal-delay-2">
+        <div class="game-header">
+          <span class="game-icon-big">🎭</span>
+          <div class="game-name">Sfide & Challenge</div>
+          <div class="game-type">Comico · Challenge · Community</div>
+        </div>
+        <div class="game-body">
+          <p class="game-desc">Le sfide gaming più assurde e divertenti. Ogni video è una sorpresa: nessuno sa come andrà a finire, neanche lui!</p>
+          <div class="game-bar"><div class="game-bar-fill" style="width:60%"></div></div>
+          <div class="game-bar-label"><span>Frequenza contenuti</span><span>60%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POSTAZIONE -->
+<section id="setup">
+  <div class="container">
+    <div class="section-label">Setup</div>
+    <h2 class="section-title">La Sua Postazione</h2>
+    <div class="divider"></div>
+    <p class="section-desc">La postazione di un gamer serio. Ecco gli strumenti che usa Ziofede82 per creare i suoi contenuti.</p>
+    <div class="setup-grid">
+      <div class="setup-visual reveal">
+        <h3 style="font-family:'Barlow Condensed';font-size:.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;">Scrivania da Gaming</h3>
+        <div class="setup-desk">
+          <div class="setup-item wide">
+            <span class="item-icon">🖥️</span>
+            <div>
+              <div class="item-name">Monitor Gaming</div>
+              <div class="item-detail">Display ad alta frequenza di aggiornamento per gameplay fluido</div>
+            </div>
+          </div>
+          <div class="setup-item">
+            <span class="item-icon">💻</span>
+            <div>
+              <div class="item-name">PC Gaming</div>
+              <div class="item-detail">Rig ottimizzato per streaming e gameplay</div>
+            </div>
+          </div>
+          <div class="setup-item">
+            <span class="item-icon">🎧</span>
+            <div>
+              <div class="item-name">Headset</div>
+              <div class="item-detail">Audio gaming per comunicare con la community</div>
+            </div>
+          </div>
+          <div class="setup-item">
+            <span class="item-icon">⌨️</span>
+            <div>
+              <div class="item-name">Tastiera</div>
+              <div class="item-detail">Setup meccanico per gaming preciso</div>
+            </div>
+          </div>
+          <div class="setup-item">
+            <span class="item-icon">🖱️</span>
+            <div>
+              <div class="item-name">Mouse Gaming</div>
+              <div class="item-detail">Alta precisione per ogni tipo di gioco</div>
+            </div>
+          </div>
+          <div class="setup-item wide">
+            <span class="item-icon">🎤</span>
+            <div>
+              <div class="item-name">Microfono</div>
+              <div class="item-detail">Audio chiaro per commentary e voice-over dei video</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="setup-specs reveal reveal-delay-1">
+        <div class="spec-group">
+          <div class="spec-group-title">Software & Tools</div>
+          <div class="spec-row">
+            <span class="spec-key">Editing Video</span>
+            <span class="spec-val">Editing Professionale</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Recording</span>
+            <span class="spec-badge">Screen Capture</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Audio</span>
+            <span class="spec-val">Mix ottimizzato</span>
+          </div>
+        </div>
+        <div class="spec-group">
+          <div class="spec-group-title">Giochi Principali</div>
+          <div class="spec-row">
+            <span class="spec-key">⛏️ Minecraft</span>
+            <span class="spec-badge">Main Game</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">🎪 Roblox</span>
+            <span class="spec-badge">Top Content</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">🎯 Sfide</span>
+            <span class="spec-val">Community Play</span>
+          </div>
+        </div>
+        <div class="spec-group">
+          <div class="spec-group-title">Piattaforma</div>
+          <div class="spec-row">
+            <span class="spec-key">Canale</span>
+            <span class="spec-val">YouTube</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Handle</span>
+            <span class="spec-val">@ziofede821</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Lingua</span>
+            <span class="spec-val">🇮🇹 Italiano</span>
+          </div>
+        </div>
+        <a href="https://www.youtube.com/@ziofede821" target="_blank" class="btn-primary" style="margin-top:1.5rem;display:inline-flex;">
+          🎬 Vedi il Canale
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section id="videos">
+  <div class="container">
+    <div class="videos-header">
+      <div>
+        <div class="section-label">Contenuti</div>
+        <h2 class="section-title">I Video</h2>
+        <div class="divider"></div>
+      </div>
+      <a href="https://www.youtube.com/@ziofede821/videos" target="_blank" class="btn-outline">
+        Tutti i Video →
+      </a>
+    </div>
+    <div class="videos-grid">
+      <a href="https://www.youtube.com/@ziofede821" target="_blank" class="video-card reveal">
+        <div class="video-thumb">
+          <div class="thumb-bg">⛏️</div>
+          <div class="play-btn">
+            <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+          </div>
+          <div class="video-duration">Minecraft ITA</div>
+        </div>
+        <div class="video-info">
+          <div class="video-category cat-minecraft">Minecraft</div>
+          <div class="video-title">Gameplay Minecraft ITA — Avventure sul Server</div>
+          <div class="video-meta">
+            <span class="video-stat">👁️ Gaming ITA</span>
+            <span class="video-stat">⛏️ Survival</span>
+          </div>
+        </div>
+      </a>
+      <a href="https://www.youtube.com/@ziofede821" target="_blank" class="video-card reveal reveal-delay-1">
+        <div class="video-thumb">
+          <div class="thumb-bg">🎪</div>
+          <div class="play-btn">
+            <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+          </div>
+          <div class="video-duration">Roblox ITA</div>
+        </div>
+        <div class="video-info">
+          <div class="video-category cat-roblox">Roblox</div>
+          <div class="video-title">Roblox Gameplay Divertente — Sfide Pazze!</div>
+          <div class="video-meta">
+            <span class="video-stat">🎮 Fun</span>
+            <span class="video-stat">😂 Comedy</span>
+          </div>
+        </div>
+      </a>
+      <a href="https://www.youtube.com/@ziofede821" target="_blank" class="video-card reveal reveal-delay-2">
+        <div class="video-thumb">
+          <div class="thumb-bg">🏆</div>
+          <div class="play-btn">
+            <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+          </div>
+          <div class="video-duration">Challenge</div>
+        </div>
+        <div class="video-info">
+          <div class="video-category cat-fun">Sfida</div>
+          <div class="video-title">Sfida Gaming con la Community — Chi Vince?</div>
+          <div class="video-meta">
+            <span class="video-stat">🎯 Challenge</span>
+            <span class="video-stat">🔥 Epico</span>
+          </div>
+        </div>
+      </a>
+      <a href="https://www.youtube.com/@ziofede821" target="_blank" class="video-card reveal">
+        <div class="video-thumb">
+          <div class="thumb-bg" style="color:var(--red)">😂</div>
+          <div class="play-btn">
+            <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+          </div>
+          <div class="video-duration">Comedy</div>
+        </div>
+        <div class="video-info">
+          <div class="video-category cat-gaming">Gaming</div>
+          <div class="video-title">Le Situazioni Più Assurde nel Gaming — Esilarante!</div>
+          <div class="video-meta">
+            <span class="video-stat">😂 Divertente</span>
+            <span class="video-stat">🎮 Gaming</span>
+          </div>
+        </div>
+      </a>
+      <a href="https://www.youtube.com/@ziofede821" target="_blank" class="video-card reveal reveal-delay-1">
+        <div class="video-thumb">
+          <div class="thumb-bg">🌍</div>
+          <div class="play-btn">
+            <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+          </div>
+          <div class="video-duration">Server ITA</div>
+        </div>
+        <div class="video-info">
+          <div class="video-category cat-minecraft">Minecraft</div>
+          <div class="video-title">Server Minecraft ITA — Nuovo Episodio!</div>
+          <div class="video-meta">
+            <span class="video-stat">🏰 Server</span>
+            <span class="video-stat">⛏️ Build</span>
+          </div>
+        </div>
+      </a>
+      <a href="https://www.youtube.com/@ziofede821" target="_blank" class="video-card reveal reveal-delay-2">
+        <div class="video-thumb">
+          <div class="thumb-bg">🍦</div>
+          <div class="play-btn">
+            <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+          </div>
+          <div class="video-duration">Special</div>
+        </div>
+        <div class="video-info">
+          <div class="video-category cat-fun">Special</div>
+          <div class="video-title">Speciale Gelato + Gaming — Il Combo Perfetto</div>
+          <div class="video-meta">
+            <span class="video-stat">🍦 Special</span>
+            <span class="video-stat">❤️ Fan Fav</span>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="view-more">
+      <a href="https://www.youtube.com/@ziofede821/videos" target="_blank" class="btn-primary">
+        ▶ Tutti i Video sul Canale
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section id="community">
+  <div class="container">
+    <div class="community-grid">
+      <div>
+        <div class="section-label">Community</div>
+        <h2 class="section-title">Unisciti alla Community</h2>
+        <div class="divider"></div>
+        <p class="section-desc">Una community di gamers italiani unita dalla passione per il gaming e… il gelato. Iscriviti e fai parte della famiglia!</p>
+        <div class="community-numbers reveal">
+          <div class="num-card">
+            <div class="num-big">ITA</div>
+            <div class="num-label">Community</div>
+          </div>
+          <div class="num-card">
+            <div class="num-big">🎮</div>
+            <div class="num-label">Gaming Focus</div>
+          </div>
+          <div class="num-card">
+            <div class="num-big">🍦</div>
+            <div class="num-label">Gelato Gang</div>
+          </div>
+          <div class="num-card">
+            <div class="num-big">😂</div>
+            <div class="num-label">Risate Garantite</div>
+          </div>
+        </div>
+        <div class="socials-list reveal reveal-delay-1">
+          <a href="https://www.youtube.com/@ziofede821" target="_blank" class="social-row">
+            <span class="social-icon">▶</span>
+            <div>
+              <div class="social-name">YouTube</div>
+              <div class="social-handle">@ziofede821</div>
+            </div>
+            <span class="social-arrow">→</span>
+          </a>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <p style="font-family:'Barlow Condensed';font-size:.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;">Perché seguire?</p>
+        <div class="values-list">
+          <div class="value-item">
+            <div class="value-num">01</div>
+            <div class="value-text">
+              <h4>Gaming Autentico</h4>
+              <p>Nessun copione, gameplay spontanei e reazioni genuine. Quello che vedi è quello che è.</p>
+            </div>
+          </div>
+          <div class="value-item">
+            <div class="value-num">02</div>
+            <div class="value-text">
+              <h4>100% Italiano</h4>
+              <p>Contenuto in italiano per la community italiana. Gaming come si deve, alla nostra maniera.</p>
+            </div>
+          </div>
+          <div class="value-item">
+            <div class="value-num">03</div>
+            <div class="value-text">
+              <h4>Divertimento Assicurato</h4>
+              <p>Ogni video è progettato per farti ridere e divertirti. Gaming + commedia = ziofede82.</p>
+            </div>
+          </div>
+          <div class="value-item">
+            <div class="value-num">04</div>
+            <div class="value-text">
+              <h4>Il Gelato è Obbligatorio</h4>
+              <p>Sei già nella community giusta se ami il gaming e il gelato. Benvenuto in famiglia!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-bg"></div>
+  <div class="container">
+    <div class="cta-inner">
+      <div class="cta-icon">🎮</div>
+      <h2 class="cta-title">Pronto a Unirti alla Famiglia?</h2>
+      <p class="cta-sub">Se ami il gaming italiano, le risate e ovviamente il gelato — questo è il canale che fa per te. Iscriviti adesso e non perdere nemmeno un video!</p>
+      <div class="cta-btns">
+        <a href="https://www.youtube.com/@ziofede821?sub_confirmation=1" target="_blank" class="btn-xl red">
+          ▶ Iscriviti Ora
+        </a>
+        <a href="https://www.youtube.com/@ziofede821/videos" target="_blank" class="btn-xl ghost">
+          🎬 Vedi i Video
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">ZIOFEDE82</div>
+    <div class="footer-copy">Sito fan-made • Tutti i diritti riservati a @ziofede821</div>
+    <div class="footer-links">
+      <a href="https://www.youtube.com/@ziofede821" target="_blank">YouTube</a>
+      <a href="#hero">Top</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
